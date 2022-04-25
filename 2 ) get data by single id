@@ -1,0 +1,13 @@
+from fastapi import FastAPI
+
+app = FastAPI()
+
+
+@app.get("/show/{id}")
+def show(id):
+    return {"data":id}
+    
+    
+    
+    
+
