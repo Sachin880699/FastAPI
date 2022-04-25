@@ -10,4 +10,18 @@ def show(id):
     
     
     
++++++++++++++++++++++++++++++++++++++++++++
 
+@app.get("/blog/{id}/comments")
+def comments(id):
+    return {"data":{"1",'2'}}
+
+
+_____ OUTPUT ______
+
+{
+"data": [
+"2",
+"1"
+]
+}
