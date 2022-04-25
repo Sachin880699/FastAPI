@@ -46,3 +46,32 @@ def all_blog(limit):
 ____ IN browser ______
 
 http://127.0.0.1:8000/blog?limit=20
+
+
+
+
+
+++++++++++++++++++++++ only published data +++++
+
+@app.get("/blog")
+def all_blog(limit,published : bool):
+    
+    # only get 10 published blogs
+    if published:
+        return {"data":f"{limit} published blog from database"}
+    else:
+        return {"data":f"{limit} blog from database"}
+
+
+
+_______ IN URL __________
+
+http://127.0.0.1:8000/blog?limit=20&published=true
+
+OUTPUT :
+    {
+"data": "20 published blog from database"
+}
+
+
+__ 
