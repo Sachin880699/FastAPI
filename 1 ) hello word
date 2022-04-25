@@ -1,0 +1,39 @@
+pip install fastapi
+sudo apt install unicorn
+
+pip install uvicorn
+
+
++++++++++++ main.py ++++++++++
+
+
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/")
+def main():
+    return {"message": "hello world again"}
+    
+    
+    
+    
+    
+@app.get("/about")
+def about():
+    return {"data":{"about page"}}
+
+
+
+
+
+++++++ for run +++
+
+uvicorn main:app --reload
+
+
+
+
+
+
+
