@@ -25,3 +25,10 @@ _____ OUTPUT ______
 "1"
 ]
 }
+
+
++++++++++++++++++++++++++++++ Pass only integer +++++++++++++++++++++
+
+@app.get("/show/{id}")
+def show(id:int):
+    return {"data":id}
