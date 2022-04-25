@@ -32,3 +32,17 @@ _____ OUTPUT ______
 @app.get("/show/{id}")
 def show(id:int):
     return {"data":id}
+
+
+
+++++++++++++++++++++++++++ Set limit of data +++++++++++++
+
+@app.get("/blog")
+def all_blog(limit):
+
+    # only get 10 published blogs
+    return {"data":f"{limit} blog from database"}
+    
+____ IN browser ______
+
+http://127.0.0.1:8000/blog?limit=20
