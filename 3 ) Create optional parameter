@@ -1,0 +1,23 @@
+from fastapi import FastAPI
+from typing import Optional # need to import this
+
+
+@app.get("/blog")
+def all_blog(limit,published : bool = True , sort:Optional[str] = None):
+    
+    # only get 10 published blogs
+    if published:
+        return {"data":f"{limit} published blog from database"}
+    else:
+        return {"data":f"{limit} blog from database"}
+        
+        
+        
+        
+ ________ IN Browser ________
+ 
+ http://127.0.0.1:8000/blog?limit=10&published=true
+ 
+ 
+ 
+ NOTE : not will show any error it's optional
