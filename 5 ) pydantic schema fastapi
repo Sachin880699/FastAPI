@@ -1,1 +1,61 @@
 
+
+
+++++++++++++++ blog/Main.py +++++++++
+
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+
+app = FastAPI()
+
+
+
+#this is our DB model
+
+class Blog(BaseModel):
+    title:str
+    body:str
+
+
+@app.post("/blog")
+def create(request:Blog):
+
+    return request
+    
++++++++++++++++++++++++++++++++++++++
+
+create folder Name is  ( blog ) inside that create file ( __init__.py )
+
+now inside blog folder create file ( schemas.py ) 
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++ Now seprate it ++++++++++++++
+
+
+________________blog/main.py _________
+
+from fastapi import FastAPI
+import schemas
+
+
+app = FastAPI()
+
+
+@app.post("/blog")
+def create(request:schemas.Blog):
+    return request
+    
+_______________ blog/schemas.py _______________
+
+from pydantic import BaseModel
+
+
+class Blog(BaseModel):
+    title:str
+    body:str
+
+    
+
