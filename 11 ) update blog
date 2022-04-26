@@ -1,0 +1,26 @@
+https://docs.sqlalchemy.org/en/13/orm/query.html?highlight=update#sqlalchemy.orm.query.Query.update
+
+
+
+@app.put("/blog/{id}",status_code = status.HTTP_202_ACCEPTED)
+def update(id , request: schemas.Blog ,db:Session = Depends(get_db)):
+    db.query(models.Blog).filter(models.Blog.id == id).update({'body': request.body})
+    db.commit()
+
+    return "update success"
+    
+    
+    
+    
+++++++++++++++ Handel with error +++++
+
+@app.put("/blog/{id}",status_code = status.HTTP_202_ACCEPTED)
+def update(id , request: schemas.Blog ,db:Session = Depends(get_db)):
+    blog = db.query(models.Blog).filter(models.Blog.id == id)
+    if not blog.first():
+        raise HTTPException(status_code = status.HTTP_404_NOT_FOUND,detail=f"blog id {id} not found")
+    else:
+        blog.update({'body': request.body})
+    db.commit()
+
+    return "update success"
