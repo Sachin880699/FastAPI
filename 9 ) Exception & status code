@@ -1,0 +1,65 @@
+https://fastapi.tiangolo.com/tutorial/response-status-code/
+
+
+@app.post("/blog",status_code = 201)   # this is status code +++++++++++++++++++++++++
+def create(request:schemas.Blog , db:Session = Depends(get_db)):
+    new_blog = models.Blog( body = request.body)
+    db.add(new_blog)
+    db.commit()
+    db.refresh(new_blog)
+    return new_blog
+
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++
+
+from fastapi import FastAPI, status
+
+@app.post("/blog",status_code=status.HTTP_201_CREATED)   # status code asa import karaycha ___________________________
+def create(request:schemas.Blog , db:Session = Depends(get_db)):
+    new_blog = models.Blog( body = request.body)
+    db.add(new_blog)
+    db.commit()
+    db.refresh(new_blog)
+    return new_blog
+    
+    
+    
+ ++++++++++++++++++++++++++++++++
+ ____ handel multiple response code 
+ 
+ 
+ from fastapi import FastAPI, status , Response
+ 
+ @app.get("/blog/{id}",status_code = 200)
+def show(id ,response:Response, db:Session = Depends(get_db)):
+    blog = db.query(models.Blog).filter(models.Blog.id == id).first()
+    if not blog:
+        response.status_code = status.HTTP_404_NOT_FOUND
+        return {"detail":f"blog with the id {id} is not available"}
+
+    return blog
+    
+    
+    
+    
++++++++++++++++++ Another way +++++++
+
+https://fastapi.tiangolo.com/tutorial/sql-databases/
+
+
+
+from fastapi import FastAPI , Depends , HTTPException  # first we need to import ( HTTPException )
+
+
+@app.get("/blog/{id}",status_code = 200)
+def show(id ,response:Response, db:Session = Depends(get_db)):
+    blog = db.query(models.Blog).filter(models.Blog.id == id).first()
+    if not blog:
+        raise HTTPException(status_code = status.HTTP_404_NOT_FOUND , detail=f"blog with id {id} not found") # ++++++++++++ we did this line
+        
+
+    return blog
+
+ 
