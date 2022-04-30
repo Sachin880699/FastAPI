@@ -1,0 +1,34 @@
+
+create (router ) folder inside blog folder and inside that file create ( __init__.py )file
+
+inside that create (user.py ) and another one ( blog.py ) 
+
+
++++++++++++++++ router/blog.py +++++++++++
+
+
+
+
+
+
+
+
+
+
+
+
+
++++++++++ database.py ++++++
+
+
+Note : at the end of the file
+
+
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield  db
+    finally:
+        db.close()
+        
